@@ -2,12 +2,12 @@ import java.util.*;
 public class LOOK {
 	private int start;
 	private int numMoves;
-	private boolean dir;
+	private String dir;
 	private String name = "LOOK";
 	
-	LOOK(int start, ArrayList<Integer> req){
+	LOOK(int start, ArrayList<Integer> req, String dir){
 		this.start = start;
-		setDir();
+		this.dir = dir;
 		numMoves = setNumMoves(start,req,dir);
 	}
 	private int setNumMoves(int start, ArrayList<Integer> req, boolean dir) { 
@@ -15,7 +15,7 @@ public class LOOK {
 		Collections.sort(req);
 		int pos = req.indexOf(start);
 		int sum = 0;
-		if(dir) {
+		if(dir == "Up") {
 		sum+=req.get(req.size()-1)-req.get(pos);
 		sum+=req.get(req.size()-1)-req.get(0);
 		} else {
@@ -25,29 +25,7 @@ public class LOOK {
 		return sum;
 	}
 	
-	private void setDir() {
-		boolean lock = false;
-		String key;
-		System.out.print("Please enter hand direction.('Up' or 'Down') ");
-		Scanner sc = new Scanner(System.in);
-		while(lock==false) {
-			//Scanner sc = new Scanner(System.in);
-			key = sc.next();
-			if(key == "Up") {
-				lock = true;
-				dir = true;
-				
-			}else if(key == "Down") {
-				lock = true;
-				dir = false;
-				
-			}else {
-				System.out.println("Please enter 'Up' or 'Down'");
-			}
-		
-		}
-		sc.close();
-	}
+	
 	
 	public int getNumMoves() {
 		return numMoves;
@@ -56,12 +34,7 @@ public class LOOK {
 		return start;
 	}
 	public String getDir() {
-		String result;
-		if(dir == false)
-			result = "Down";
-		else
-			result = "Up";
-		return result;
+		return dir;
 	}
 	public String getName() {
 		return name;
